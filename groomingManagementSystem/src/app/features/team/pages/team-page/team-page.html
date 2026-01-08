@@ -1,0 +1,101 @@
+<div class="page-wrap">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Team</h1>
+      <div class="page-subtitle">Gestione membri, ruoli, disponibilità e capacità</div>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-funnel me-2"></i>Filtri
+      </button>
+      <button class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-lg me-2"></i>Nuovo membro
+      </button>
+    </div>
+  </div>
+
+  <div class="card table-card">
+    <div class="card-body p-0">
+      <table class="table align-middle mb-0 team-table">
+        <thead>
+          <tr>
+            <th style="width: 70px;">Avatar</th>
+            <th>Membro</th>
+            <th style="width: 140px;">Ruolo</th>
+            <th style="width: 120px;">Ore/sett.</th>
+            <th style="width: 160px;">Velocità</th>
+            <th>Servizi</th>
+            <th style="width: 150px;">Contatti</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let m of members$ | async" class="row-hover">
+            <td>
+              <img
+                class="avatar"
+                [src]="m.photoUrl || 'assets/img/user.png'"
+                [alt]="m.firstName + ' ' + m.lastName"
+                loading="lazy"
+              />
+            </td>
+
+            <td>
+              <div class="name-cell">
+                <div class="name">
+                  {{ m.firstName }} {{ m.lastName }}
+                  <span class="status-dot" [class.off]="!m.isActive" title="Stato"></span>
+                </div>
+
+                <div class="sub" *ngIf="m.notes">{{ m.notes }}</div>
+              </div>
+            </td>
+
+            <td>
+              <span class="badge" [ngClass]="roleBadgeClass(m.role)">{{ m.role }}</span>
+            </td>
+
+            <td class="mono">
+              {{ weeklyHours(m) }}h
+            </td>
+
+            <td>
+              <div class="speed">
+                <div class="speed-value mono">{{ m.speedFactor }}</div>
+                <div class="speed-hint muted">
+                  <span *ngIf="m.speedFactor >= 1.15">molto veloce</span>
+                  <span *ngIf="m.speedFactor < 1.15 && m.speedFactor >= 1.0">standard+</span>
+                  <span *ngIf="m.speedFactor < 1.0">più lenta/o</span>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="chips">
+                <span class="chip" *ngFor="let s of m.services">{{ s }}</span>
+              </div>
+            </td>
+
+            <td>
+              <div class="contacts">
+                <div class="contact mono">
+                  <i class="bi bi-telephone me-2"></i>{{ m.phone }}
+                </div>
+                <div class="contact" *ngIf="m.email">
+                  <i class="bi bi-envelope me-2"></i>{{ m.email }}
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="(members$ | async)?.length === 0">
+            <td colspan="7" class="empty">
+              Nessun membro presente.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

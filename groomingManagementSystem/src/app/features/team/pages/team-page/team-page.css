@@ -1,0 +1,165 @@
+.page-wrap {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 28px 24px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.page-subtitle {
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 13px;
+}
+
+.page-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.table-card {
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.team-table thead th {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  padding: 14px 16px;
+}
+
+.team-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.row-hover:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+
+.name-cell .name {
+  font-weight: 800;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name-cell .sub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(25, 135, 84, 0.85); /* “verde bootstrap” */
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.12);
+}
+
+.status-dot.off {
+  background: rgba(220, 53, 69, 0.85);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.12);
+}
+
+.badge-role {
+  border: 1px solid rgba(0,0,0,.08);
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 999px;
+  text-transform: lowercase;
+}
+
+.badge-groomer { background: rgba(13,110,253,.10); color: rgba(13,110,253,.95); }
+.badge-wash { background: rgba(25,135,84,.10); color: rgba(25,135,84,.95); }
+.badge-trainee { background: rgba(255,193,7,.14); color: rgba(161,98,7,.95); }
+.badge-reception { background: rgba(108,117,125,.12); color: rgba(108,117,125,.95); }
+
+.muted {
+  color: rgba(0,0,0,.55);
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.speed {
+  display: grid;
+  gap: 2px;
+}
+
+.speed-value {
+  font-weight: 800;
+}
+
+.speed-hint {
+  font-size: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.contacts {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(0,0,0,.75);
+}
+
+.contact i {
+  opacity: 0.7;
+}
+
+.empty {
+  padding: 26px 16px;
+  text-align: center;
+  color: rgba(0,0,0,.55);
+}
