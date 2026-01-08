@@ -19,16 +19,27 @@
     <!-- Nav -->
     <nav class="sidebar-nav px-2 mt-2">
       <a
-        *ngFor="let item of navItems"
         class="nav-item"
-        [routerLink]="item.path"
+        routerLink="/"
         routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
       >
-        <span class="nav-icon">
-          <i class="bi" [ngClass]="item.icon"></i>
-        </span>
-        <span class="nav-label">{{ item.label }}</span>
+        <span class="nav-icon"><i class="bi bi-house"></i></span>
+        <span class="nav-label">Homepage</span>
+      </a>
+
+      <a class="nav-item" routerLink="/agenda" routerLinkActive="active">
+        <span class="nav-icon"><i class="bi bi-calendar2-week"></i></span>
+        <span class="nav-label">Agenda</span>
+      </a>
+
+      <a class="nav-item" routerLink="/team" routerLinkActive="active">
+        <span class="nav-icon"><i class="bi bi-people"></i></span>
+        <span class="nav-label">Team</span>
+      </a>
+
+      <a class="nav-item" routerLink="/clients" routerLinkActive="active">
+        <span class="nav-icon"><img class="nav-icon-img" src="assets/img/dog.png" alt="Dog"></span>
+        <span class="nav-label">Clients</span>
       </a>
     </nav>
 

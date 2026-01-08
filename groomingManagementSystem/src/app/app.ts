@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 
 type NavItem = {
   label: string;
@@ -12,17 +12,14 @@ type NavItem = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLinkWithHref],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('groomingManagementSystem');
 
-  navItems: NavItem[] = [
-    { label: 'Homepage', path: '/', icon: 'bi-house', exact: true },
-    { label: 'Agenda', path: '/agenda', icon: 'bi-calendar2-week' },
-    { label: 'Team', path: '/team', icon: 'bi-people' },
-    { label: 'Clients', path: '/clients', icon: 'bi-person-heart' },
-  ];
+  printSomething(){
+    console.log("Opzione va");
+  }
 }

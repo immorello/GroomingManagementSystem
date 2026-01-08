@@ -130,6 +130,15 @@
   }
 }
 
+.nav-icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) invert(1); /* se l’icona è scura e vuoi bianca su sidebar */
+}
+
+
 /* Responsive (se vuoi: sidebar più stretta su schermi piccoli) */
 @media (max-width: 992px) {
   .sidebar {
