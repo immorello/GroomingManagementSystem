@@ -1,0 +1,170 @@
+<div class="details-wrap" *ngIf="$dogDetails | async as dog; else loading">
+  <!-- Top bar -->
+  <div class="topbar">
+    <button class="btn btn-light btn-sm back-btn" routerLink="/clients">
+      <i class="bi bi-arrow-left me-2"></i>Clients
+    </button>
+
+    <div class="actions">
+      <button class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-pencil me-2"></i>Modifica
+      </button>
+      <button class="btn btn-outline-danger btn-sm">
+        <i class="bi bi-trash me-2"></i>Elimina
+      </button>
+    </div>
+  </div>
+
+  <!-- Header card -->
+  <div class="card hero-card">
+    <div class="hero">
+      <div class="hero-left">
+        <img
+          class="hero-avatar"
+          [src]="dog.photoUrl || 'assets/img/dog.png'"
+          [alt]="dog.name"
+        />
+
+        <div class="hero-text">
+          <div class="hero-title">
+            <span class="name">{{ dog.name }}</span>
+            <span class="badge text-bg-light badge-soft ms-2">{{ dog.breedName }}</span>
+          </div>
+
+          <div class="hero-sub">
+            <span class="muted">Padrone:</span>
+            <span class="owner">{{ dog.owner.firstName }} {{ dog.owner.lastName }}</span>
+            <span class="dot">•</span>
+            <span class="muted">Tel:</span>
+            <span class="mono">{{ dog.owner.phone }}</span>
+          </div>
+
+          <div class="hero-tags" *ngIf="dog.tags?.length">
+            <span class="tag" *ngFor="let t of dog.tags">{{ t }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="kpi">
+          <div class="kpi-label">Durata base</div>
+          <div class="kpi-value">{{ dog.defaultServiceDurationMin }}m</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Moltiplicatore</div>
+          <div class="kpi-value">{{ dog.durationMultiplier ?? 1 }}</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Ultima durata effettiva</div>
+          <div class="kpi-value">{{ dog.lastActualDurationMin ?? '—' }}<span *ngIf="dog.lastActualDurationMin">m</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content grid -->
+  <div class="grid">
+    <!-- Left column -->
+    <div class="card section-card">
+      <div class="section-head">
+        <div class="section-title">Profilo Cane</div>
+      </div>
+
+      <div class="section-body">
+        <div class="info-grid">
+          <div class="info">
+            <div class="label">Tipo di pelo</div>
+            <div class="value">{{ dog.coatType ?? '—' }}</div>
+          </div>
+
+          <div class="info">
+            <div class="label">Comportamento</div>
+            <div class="value">{{ dog.behavior ?? '—' }}</div>
+          </div>
+
+          <div class="info">
+            <div class="label">Due persone necessarie</div>
+            <div class="value">{{ dog.needsTwoPeople ? 'Yes' : 'No' }}</div>
+          </div>
+
+          <div class="info">
+            <div class="label">Museruola</div>
+            <div class="value">{{ dog.muzzleRequired ? 'Yes' : 'No' }}</div>
+          </div>
+
+          <div class="info wide" *ngIf="dog.allergiesOrProducts">
+            <div class="label">Allergie / Prodotti</div>
+            <div class="value">{{ dog.allergiesOrProducts }}</div>
+          </div>
+        </div>
+
+        <div class="note-box" *ngIf="dog.notes">
+          <div class="note-label">Note</div>
+          <div class="note-text">{{ dog.notes }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="card section-card">
+      <div class="section-head">
+        <div class="section-title">Owner</div>
+      </div>
+
+      <div class="section-body">
+        <div class="owner-card">
+          <div class="owner-avatar">
+            {{ (dog.owner.firstName[0] || '') + (dog.owner.lastName[0] || '') }}
+
+          </div>
+
+          <div class="owner-meta">
+            <div class="owner-name">{{ dog.owner.firstName }} {{ dog.owner.lastName }}</div>
+            <div class="owner-contacts">
+              <div class="contact">
+                <i class="bi bi-telephone me-2"></i>
+                <span class="mono">{{ dog.owner.phone }}</span>
+              </div>
+
+              <div class="contact" *ngIf="dog.owner.email">
+                <i class="bi bi-envelope me-2"></i>
+                <span>{{ dog.owner.email }}</span>
+              </div>
+
+              <div class="contact" *ngIf="dog.owner.preferredContact">
+                <i class="bi bi-chat-dots me-2"></i>
+                <span>Metodo di contatto: {{ dog.owner.preferredContact }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="history">
+          <div class="history-title">Dati pregressi</div>
+          <div class="history-row">
+            <span class="muted">Ultimo appuntamento</span>
+            <span class="value">{{ dog.lastVisitAt ? (dog.lastVisitAt | date:'mediumDate') : '—' }}</span>
+          </div>
+          <div class="history-row">
+            <span class="muted">Durata ultimo appuntamento</span>
+            <span class="value">{{ dog.lastActualDurationMin ?? '—' }}<span *ngIf="dog.lastActualDurationMin">m</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="details-wrap">
+    <div class="card section-card p-4">
+      <div class="placeholder-glow">
+        <div class="placeholder col-4 mb-3"></div>
+        <div class="placeholder col-6 mb-2"></div>
+        <div class="placeholder col-8"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

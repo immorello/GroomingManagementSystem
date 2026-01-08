@@ -24,7 +24,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let dog of dogs$ | async" class="row-hover">
+          <tr *ngFor="let dog of dogs$ | async" class="row-hover" [routerLink]="['/clients', dog.id]" style="cursor:pointer">
             <td>
               <img [src]="dog.photoUrl" [alt]="dog.name" class="avatar" loading="lazy" />
             </td>

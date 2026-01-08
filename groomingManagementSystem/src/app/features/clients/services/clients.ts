@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DogClient } from '../models/dog-client.model';
-import { DOG_CLIENTS_MOCK } from '../models/mocks/dog-clients.mock';
+import { DOG_CLIENTS_MOCK } from '../mocks/dog-clients.mock';
 
 @Injectable({ providedIn: 'root' })
 export class ClientsService {

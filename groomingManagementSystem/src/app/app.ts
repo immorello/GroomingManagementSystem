@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { Sidebar } from './core/layout/sidebar/sidebar';
 
 type NavItem = {
   label: string;
@@ -12,14 +13,12 @@ type NavItem = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLinkWithHref],
+  imports: [CommonModule, RouterOutlet, Sidebar],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('groomingManagementSystem');
 
-  printSomething(){
-    console.log("Opzione va");
-  }
+  
 }

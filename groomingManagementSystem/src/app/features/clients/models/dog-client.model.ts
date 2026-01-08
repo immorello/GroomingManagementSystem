@@ -1,12 +1,12 @@
-export type DogBehavior = 'calm' | 'normal' | 'anxious' | 'difficult';
-export type CoatType = 'short' | 'medium' | 'long' | 'curly' | 'double';
+export type DogBehavior = 'calmo' | 'normale' | 'ansioso' | 'difficile';
+export type CoatType = 'corto' | 'medio' | 'lungo' | 'riccio' | 'doppio';
 
 export interface Owner {
   firstName: string;
   lastName: string;
   phone: string;
   email?: string;
-  preferredContact?: 'phone' | 'whatsapp' | 'email';
+  preferredContact?: 'telefono' | 'whatsapp' | 'email';
 }
 
 export interface DogClient {

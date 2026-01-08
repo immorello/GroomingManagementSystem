@@ -1,55 +1,6 @@
 <div class="app-shell d-flex">
   <!-- SIDEBAR -->
-  <aside class="sidebar d-flex flex-column">
-    <!-- Brand -->
-    <div class="sidebar-brand px-4 pt-4 pb-3">
-      <div class="d-flex align-items-center gap-3">
-        <div class="brand-mark d-grid place-center">
-          <!-- logo placeholder: puoi sostituire con <img ...> -->
-          <span class="brand-dog"><img src="assets/logo.png" alt=""></span>
-        </div>
-
-        <div class="brand-text">
-          <div class="brand-name">Best<span class="brand-accent">for</span>pets</div>
-          <div class="brand-sub">SPA &amp; BOUTIQUE FOR DOGS</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Nav -->
-    <nav class="sidebar-nav px-2 mt-2">
-      <a
-        class="nav-item"
-        routerLink="/"
-        routerLinkActive="active"
-      >
-        <span class="nav-icon"><i class="bi bi-house"></i></span>
-        <span class="nav-label">Homepage</span>
-      </a>
-
-      <a class="nav-item" routerLink="/agenda" routerLinkActive="active">
-        <span class="nav-icon"><i class="bi bi-calendar2-week"></i></span>
-        <span class="nav-label">Agenda</span>
-      </a>
-
-      <a class="nav-item" routerLink="/team" routerLinkActive="active">
-        <span class="nav-icon"><i class="bi bi-people"></i></span>
-        <span class="nav-label">Team</span>
-      </a>
-
-      <a class="nav-item" routerLink="/clients" routerLinkActive="active">
-        <span class="nav-icon"><img class="nav-icon-img" src="assets/img/dog.png" alt="Dog"></span>
-        <span class="nav-label">Clients</span>
-      </a>
-    </nav>
-
-    <!-- Bottom icon -->
-    <div class="sidebar-footer mt-auto px-4 pb-4">
-      <div class="footer-icon">
-        <i class="bi bi-scissors"></i>
-      </div>
-    </div>
-  </aside>
+  <app-sidebar></app-sidebar>
 
   <!-- MAIN CONTENT -->
   <main class="content flex-grow-1">
