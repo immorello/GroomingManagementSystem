@@ -1,0 +1,194 @@
+<div class="details-wrap" *ngIf="member$ | async as m; else loading">
+  <!-- Top bar -->
+  <div class="topbar">
+    <button class="btn btn-light btn-sm back-btn" routerLink="/team">
+      <i class="bi bi-arrow-left me-2"></i>Team
+    </button>
+
+    <div class="actions">
+      <button class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-pencil me-2"></i>Modifica
+      </button>
+      <button class="btn btn-outline-danger btn-sm">
+        <i class="bi bi-person-x me-2"></i>Disattiva
+      </button>
+    </div>
+  </div>
+
+  <!-- Header card -->
+  <div class="card hero-card">
+    <div class="hero">
+      <div class="hero-left">
+        <img
+          class="hero-avatar"
+          [src]="m.photoUrl || 'assets/img/user.png'"
+          [alt]="m.firstName + ' ' + m.lastName"
+          loading="lazy"
+        />
+
+        <div class="hero-text">
+          <div class="hero-title">
+            <span class="name">{{ m.firstName }} {{ m.lastName }}</span>
+            <span class="badge role-badge">{{ m.role }}</span>
+            <span class="status-pill" [class.off]="!m.isActive">
+              {{ m.isActive ? 'attivo' : 'non attivo' }}
+            </span>
+          </div>
+
+          <div class="hero-sub">
+            <span class="muted">Tel:</span>
+            <span class="mono">{{ m.phone }}</span>
+            <span class="dot">•</span>
+            <span class="muted">Email:</span>
+            <span>{{ m.email || '—' }}</span>
+          </div>
+
+          <div class="chips" *ngIf="m.services.length">
+            <span class="chip" *ngFor="let s of m.services">{{ s }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="kpi">
+          <div class="kpi-label">Velocità</div>
+          <div class="kpi-value mono">{{ m.speedFactor }}</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Difficoltà</div>
+          <div class="kpi-value">{{ m.difficultyLevel ?? '—' }}</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Max in parallelo</div>
+          <div class="kpi-value">{{ m.maxConcurrentDogs ?? 1 }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid">
+    <!-- Schedule -->
+    <div class="card section-card">
+      <div class="section-head">
+        <div class="section-title">Disponibilità settimanale</div>
+      </div>
+
+      <div class="section-body">
+        <div class="schedule">
+          <div class="day">
+            <div class="day-name">Lun</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.mon || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.mon || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Mar</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.tue || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.tue || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Mer</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.wed || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.wed || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Gio</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.thu || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.thu || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Ven</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.fri || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.fri || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Sab</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.sat || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.sat || []).length === 0">—</span>
+            </div>
+          </div>
+
+          <div class="day">
+            <div class="day-name">Dom</div>
+            <div class="day-slots">
+              <ng-container *ngFor="let r of m.schedule.sun || []">
+                <span class="slot">{{ r.start }}–{{ r.end }}</span>
+              </ng-container>
+              <span class="slot slot-empty" *ngIf="(m.schedule.sun || []).length === 0">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Time off + notes -->
+    <div class="card section-card">
+      <div class="section-head">
+        <div class="section-title">Assenze e note</div>
+      </div>
+
+      <div class="section-body">
+        <div class="timeoff" *ngIf="m.timeOff?.length; else noTimeoff">
+          <div class="timeoff-row" *ngFor="let t of m.timeOff">
+            <span class="pill">{{ t.type }}</span>
+            <div class="timeoff-main">
+              <div class="timeoff-dates mono">{{ t.start }} → {{ t.end }}</div>
+              <div class="timeoff-note muted" *ngIf="t.note">{{ t.note }}</div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noTimeoff>
+          <div class="muted">Nessuna assenza registrata.</div>
+        </ng-template>
+
+        <div class="note-box" *ngIf="m.notes">
+          <div class="note-label">Note</div>
+          <div class="note-text">{{ m.notes }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="details-wrap">
+    <div class="card section-card p-4">
+      <div class="placeholder-glow">
+        <div class="placeholder col-4 mb-3"></div>
+        <div class="placeholder col-6 mb-2"></div>
+        <div class="placeholder col-8"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

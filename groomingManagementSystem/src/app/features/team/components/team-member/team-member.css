@@ -1,0 +1,272 @@
+.details-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.back-btn {
+  border-radius: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* cards */
+.hero-card,
+.section-card {
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px;
+}
+
+.hero-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.hero-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 10px 24px rgba(0,0,0,.16);
+  flex: 0 0 auto;
+}
+
+.hero-text {
+  min-width: 0;
+}
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-title .name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.role-badge {
+  border-radius: 999px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(0,0,0,.04);
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.status-pill {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(25,135,84,.12);
+  color: rgba(25,135,84,.95);
+  border: 1px solid rgba(25,135,84,.20);
+}
+
+.status-pill.off {
+  background: rgba(220,53,69,.12);
+  color: rgba(220,53,69,.95);
+  border: 1px solid rgba(220,53,69,.20);
+}
+
+.hero-sub {
+  margin-top: 6px;
+  color: rgba(0,0,0,.65);
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.muted { color: rgba(0,0,0,.55); }
+.mono { font-variant-numeric: tabular-nums; }
+.dot { opacity: .5; }
+
+/* chips */
+.chips {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* KPI */
+.hero-right {
+  display: flex;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.kpi {
+  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  padding: 10px 12px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.kpi-label {
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+}
+
+.kpi-value {
+  margin-top: 2px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* grid */
+.grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+}
+
+.section-head {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.section-title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.section-body {
+  padding: 14px 16px 16px;
+}
+
+/* schedule */
+.schedule {
+  display: grid;
+  gap: 10px;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.day-name {
+  font-weight: 800;
+  color: rgba(0,0,0,.65);
+}
+
+.day-slots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.slot {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.slot-empty {
+  opacity: .65;
+}
+
+/* time off */
+.timeoff {
+  display: grid;
+  gap: 10px;
+}
+
+.timeoff-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(0,0,0,.04);
+  font-weight: 700;
+  text-transform: lowercase;
+  flex: 0 0 auto;
+}
+
+.timeoff-dates {
+  font-weight: 800;
+}
+
+.note-box {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.note-label {
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  margin-bottom: 6px;
+}
+
+.note-text {
+  color: rgba(0,0,0,.85);
+  line-height: 1.35;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { flex-direction: column; align-items: stretch; }
+  .hero-right { width: 100%; justify-content: space-between; }
+  .kpi { flex: 1 1 auto; }
+}

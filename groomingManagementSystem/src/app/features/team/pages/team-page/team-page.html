@@ -31,7 +31,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let m of members$ | async" class="row-hover">
+          <tr *ngFor="let m of members$ | async" class="row-hover" [routerLink]="['/team', m.id]" style="cursor:pointer">
             <td>
               <img
                 class="avatar"

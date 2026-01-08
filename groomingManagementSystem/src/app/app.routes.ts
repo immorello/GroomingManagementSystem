@@ -3,10 +3,12 @@ import { HomePage } from './features/home/pages/home-page/home-page';
 import { ClientsPage } from './features/clients/pages/clients-page/clients-page';
 import { ClientsDetails } from './features/clients/components/clients-details/clients-details';
 import { TeamPage } from './features/team/pages/team-page/team-page';
+import { TeamMemberComponent } from './features/team/components/team-member/team-member';
 
 export const routes: Routes = [
     {path:'',component:HomePage, pathMatch:'full'},
     {path:'clients',component:ClientsPage},
     {path:'clients/:id',component:ClientsDetails},
-    {path:'team',component:TeamPage}
+    {path:'team',component:TeamPage},
+    {path:'team/:id',component:TeamMemberComponent}
 ];

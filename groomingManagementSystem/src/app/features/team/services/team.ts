@@ -13,7 +13,7 @@ export class Team {
       return of(this.teamMembers);
     }
   
-    getById(id: string): Observable<TeamMember | undefined> {
+    getById(id: string | null): Observable<TeamMember | undefined> {
       return of(this.teamMembers.find(c => c.id === id));
     }
 }
