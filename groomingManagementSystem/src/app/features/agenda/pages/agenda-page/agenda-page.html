@@ -1,0 +1,115 @@
+<div class="page-wrap">
+  <div class="container py-4 py-lg-5">
+    <div class="header mb-4">
+      <div>
+        <p class="eyebrow mb-2">Agenda</p>
+        <h1 class="display-title mb-2">Calendario prenotazioni</h1>
+        <p class="subtle mb-0">Bozza griglia calendario pronta per gli appuntamenti.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-dark btn-sm" type="button">
+          <i class="bi bi-plus-lg me-2"></i>Aggiungi appuntamento
+        </button>
+        <button class="btn btn-outline-dark btn-sm" type="button">
+          <i class="bi bi-sliders me-2"></i>Filtri
+        </button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-lg-3">
+        <div class="card-surface h-100">
+          <h2 class="section-title">Gestione</h2>
+          <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-dark" type="button">Nuova prenotazione</button>
+            <button class="btn btn-outline-dark" type="button">Importa richieste</button>
+          </div>
+
+        <div class="mini-panel">
+            <p class="mb-1 fw-semibold">Vista calendario</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="chip" type="button" [class.chip-active]="viewMode === 'week'" (click)="setView('week')">
+                Settimanale
+              </button>
+              <button class="chip" type="button" [class.chip-active]="viewMode === 'day'" (click)="setView('day')">
+                Giornaliera
+              </button>
+              <button class="chip" type="button" [class.chip-active]="viewMode === 'month'" (click)="setView('month')">
+                Mensile
+              </button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="mini-panel">
+            <p class="mb-1 fw-semibold">Legenda</p>
+            <div class="legend">
+              <span class="legend-dot status-green"></span>
+              <span class="small subtle">Confermato</span>
+            </div>
+            <div class="legend">
+              <span class="legend-dot status-amber"></span>
+              <span class="small subtle">Da richiamare</span>
+            </div>
+            <div class="legend">
+              <span class="legend-dot status-slate"></span>
+              <span class="small subtle">In attesa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-9">
+        <div class="card-surface">
+          <div class="calendar-toolbar mb-3">
+            <div class="toolbar-left">
+              <button class="btn btn-outline-dark btn-sm" type="button" (click)="prevPeriod()">
+                <i class="bi bi-chevron-left"></i>
+              </button>
+              <button class="btn btn-outline-dark btn-sm" type="button" (click)="nextPeriod()">
+                <i class="bi bi-chevron-right"></i>
+              </button>
+              <span class="toolbar-title">{{ toolbarTitle }}</span>
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-outline-dark btn-sm" type="button" (click)="setToday()">
+                Oggi
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-grid" [ngClass]="viewMode">
+            <ng-container *ngIf="viewMode !== 'month'">
+              <div class="calendar-row calendar-head">
+                <div class="time-col"></div>
+                <div class="day-col" *ngFor="let day of displayDays">{{ formatDayLabel(day) }}</div>
+              </div>
+
+              <div class="calendar-row" *ngFor="let hour of hours">
+                <div class="time-col">{{ formatHour(hour) }}</div>
+                <div class="slot" *ngFor="let day of displayDays"></div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="viewMode === 'month'">
+              <div class="calendar-row calendar-head month-head">
+                <div class="day-col" *ngFor="let dayName of weekDayNames">{{ dayName }}</div>
+              </div>
+              <div class="month-grid">
+                <div
+                  class="month-cell"
+                  *ngFor="let day of monthGrid"
+                  [class.is-outside]="day.getMonth() !== currentDate.getMonth()"
+                  [class.is-today]="isToday(day)"
+                >
+                  <span class="month-date">{{ day.getDate() }}</span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
