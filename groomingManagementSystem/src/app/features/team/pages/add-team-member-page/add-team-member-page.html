@@ -1,0 +1,114 @@
+<div class="page-wrap">
+  <div class="container py-4 py-lg-5">
+    <div class="header mb-4">
+      <div>
+        <p class="eyebrow mb-2">Gestione team</p>
+        <h1 class="display-title mb-2">Aggiungi nuovo membro del team</h1>
+        <p class="subtle mb-0">Prepara il layout del profilo e tieni tutto pronto per l'inserimento dei dati.</p>
+      </div>
+      <div class="header-actions">
+        <span class="status-pill">Bozza</span>
+        <button class="btn btn-outline-dark btn-sm" type="button">Anteprima scheda</button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-lg-4">
+        <div class="card-surface h-100">
+          <h2 class="section-title">Snapshot profilo</h2>
+          <div class="photo-drop">
+            <div class="photo-circle"></div>
+            <div>
+              <p class="mb-1 fw-semibold">Carica foto</p>
+              <p class="small subtle mb-0">PNG o JPG fino a 5MB</p>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label">Stato</label>
+            <div class="d-flex gap-2 flex-wrap">
+              <span class="chip chip-active">Attivo</span>
+              <span class="chip">Onboarding</span>
+              <span class="chip">In congedo</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="quick-notes">
+            <label class="form-label">Note</label>
+            <textarea class="form-control" rows="5" placeholder="Aggiungi note private per HR"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8">
+        <div class="card-surface">
+          <h2 class="section-title">Dettagli principali</h2>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label">Nome</label>
+              <input class="form-control" type="text" placeholder="Giulia" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Cognome</label>
+              <input class="form-control" type="text" placeholder="Bianchi" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Ruolo</label>
+              <input class="form-control" type="text" placeholder="Groomer senior" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Reparto</label>
+              <select class="form-select">
+                <option selected>Seleziona</option>
+                <option>Grooming</option>
+                <option>Reception</option>
+                <option>Vendita</option>
+                <option>Operazioni</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" placeholder="jane@email.com" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Telefono</label>
+              <input class="form-control" type="tel" placeholder="+39 333 123 4567" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card-surface mt-4">
+          <h2 class="section-title">Pianificazione e credenziali</h2>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label">Data inizio</label>
+              <input class="form-control" type="date" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Tipo contratto</label>
+              <select class="form-select">
+                <option selected>Seleziona</option>
+                <option>Tempo pieno</option>
+                <option>Tempo parziale</option>
+                <option>Freelance</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Giorni di lavoro</label>
+              <input class="form-control" type="text" placeholder="Lun, Mar, Gio, Ven" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Ore giornaliere</label>
+              <input class="form-control" type="text" placeholder="09:00 - 18:00" />
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <button class="btn btn-dark" type="button">Salva bozza</button>
+            <button class="btn btn-outline-dark" type="button">Invita piu tardi</button>
+            <p class="small subtle mb-0">I pulsanti sono segnaposto per azioni future.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ClientsService } from '../../services/clients';
 import { Observable } from 'rxjs';
 import { DogClient } from '../../models/dog-client.model';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 
 @Component({
@@ -15,8 +15,8 @@ export class ClientsDetails {
   dogId: string;
   $dogDetails: Observable<DogClient | undefined>;
 
-  constructor(clients:ClientsService, router:Router){
-    this.dogId = router.url.split('/')[2]
+  constructor(clients:ClientsService, route:ActivatedRoute){
+    this.dogId = route.snapshot.paramMap.get('id') ?? '';
     this.$dogDetails = clients.getById(this.dogId);
   }
 }
