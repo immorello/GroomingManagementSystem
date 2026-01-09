@@ -5,10 +5,12 @@ import { ClientsDetails } from './features/clients/components/clients-details/cl
 import { TeamPage } from './features/team/pages/team-page/team-page';
 import { TeamMemberComponent } from './features/team/components/team-member/team-member';
 import { AddTeamMemberPage } from './features/team/pages/add-team-member-page/add-team-member-page';
+import { AddNewClient } from './features/clients/pages/add-new-client/add-new-client';
 
 export const routes: Routes = [
     {path:'',component:HomePage, pathMatch:'full'},
     {path:'clients',component:ClientsPage},
+    {path:'clients/add-new-client',component:AddNewClient},
     {path:'clients/:id',component:ClientsDetails},
     {path:'team',component:TeamPage},
     {path:'team/add-new-member',component:AddTeamMemberPage},

@@ -1,0 +1,118 @@
+.page-wrap {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #f5f1ea 10%, rgba(245, 241, 234, 0) 70%),
+    radial-gradient(1200px 500px at 100% 10%, #e9f2f6 0%, rgba(233, 242, 246, 0) 65%),
+    linear-gradient(180deg, #fbfaf7 0%, #f6f5f2 100%);
+  color: #1f1e1c;
+  font-family: "Space Grotesk", "Montserrat", "Segoe UI", sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b6460;
+}
+
+.display-title {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+}
+
+.subtle {
+  color: #6b6460;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-pill {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #e6efe6;
+  color: #2b5530;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.card-surface {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 24px 60px rgba(31, 30, 28, 0.08);
+  border: 1px solid rgba(31, 30, 28, 0.08);
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.photo-drop {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px dashed rgba(31, 30, 28, 0.2);
+  background: #faf9f6;
+}
+
+.photo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #efdbcf 0%, #e3efe8 100%);
+  border: 1px solid rgba(31, 30, 28, 0.08);
+}
+
+.chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #f2f2f2;
+  color: #4c4744;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.chip-active {
+  background: #1f1e1c;
+  color: #ffffff;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(31, 30, 28, 0.1);
+  margin: 1.5rem 0;
+}
+
+.form-control,
+.form-select {
+  border-radius: 12px;
+  border-color: rgba(31, 30, 28, 0.15);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #1f1e1c;
+  box-shadow: 0 0 0 0.2rem rgba(31, 30, 28, 0.1);
+}
+
+@media (max-width: 991px) {
+  .header {
+    align-items: flex-start;
+  }
+}
