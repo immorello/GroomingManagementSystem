@@ -205,10 +205,94 @@
     transparent 70%,
     rgba(31, 30, 28, 0.03) 100%
   );
+  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  cursor: pointer;
 }
 
 .slot:hover {
   background: rgba(31, 30, 28, 0.04);
+}
+
+.appointment-card {
+  padding: 0.5rem 0.65rem;
+  border-radius: 12px;
+  background: #f6f4f1;
+  border: 1px solid rgba(31, 30, 28, 0.1);
+  box-shadow: 0 10px 24px rgba(31, 30, 28, 0.08);
+  cursor: pointer;
+}
+
+.appointment-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.appointment-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.appointment-time {
+  font-size: 0.75rem;
+  color: #6b6460;
+}
+
+.appointment-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: #6b6460;
+}
+
+.appointment-tag {
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(31, 30, 28, 0.08);
+  color: #3d3834;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.65rem;
+}
+
+.appointment-owner {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-confirmed {
+  border-color: rgba(43, 85, 48, 0.35);
+  background: rgba(43, 85, 48, 0.08);
+  color: #1f1e1c;
+}
+
+.status-progress {
+  border-color: rgba(195, 123, 50, 0.4);
+  background: rgba(195, 123, 50, 0.12);
+}
+
+.status-completed {
+  border-color: rgba(62, 97, 138, 0.35);
+  background: rgba(62, 97, 138, 0.12);
+}
+
+.status-cancelled,
+.status-no-show {
+  border-color: rgba(140, 56, 56, 0.35);
+  background: rgba(140, 56, 56, 0.12);
+}
+
+.status-draft {
+  border-color: rgba(31, 30, 28, 0.2);
+  background: rgba(31, 30, 28, 0.06);
 }
 
 .month-grid {
@@ -224,6 +308,8 @@
   min-height: 90px;
   position: relative;
   background: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .month-cell:nth-child(7n + 1) {
@@ -247,6 +333,86 @@
 
 .month-cell.is-today .month-date {
   color: #ffffff;
+}
+
+.month-cell:hover {
+  background: rgba(31, 30, 28, 0.08);
+}
+
+.month-appointments {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.month-chip {
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(31, 30, 28, 0.08);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.month-chip:hover {
+  background: rgba(31, 30, 28, 0.2);
+  color: #1f1e1c;
+}
+
+.month-count {
+  font-size: 0.7rem;
+  color: #6b6460;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 14, 12, 0.7);
+  z-index: 1040;
+}
+
+.modal-panel {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1050;
+}
+
+.modal-dialog {
+  max-width: 720px;
+  width: 100%;
+}
+
+.modal-content {
+  border-radius: 20px;
+  border: 1px solid rgba(31, 30, 28, 0.12);
+  box-shadow: 0 30px 80px rgba(15, 14, 12, 0.25);
+  background: #ffffff;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+.modal-header {
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+.modal-body {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.modal-footer {
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
 }
 
 @media (max-width: 991px) {

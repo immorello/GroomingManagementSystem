@@ -7,7 +7,7 @@
         <p class="subtle mb-0">Bozza griglia calendario pronta per gli appuntamenti.</p>
       </div>
       <div class="header-actions">
-        <button class="btn btn-dark btn-sm" type="button">
+        <button class="btn btn-dark btn-sm" type="button" (click)="openCreate()">
           <i class="bi bi-plus-lg me-2"></i>Aggiungi appuntamento
         </button>
         <button class="btn btn-outline-dark btn-sm" type="button">
@@ -21,7 +21,7 @@
         <div class="card-surface h-100">
           <h2 class="section-title">Gestione</h2>
           <div class="d-grid gap-2 mb-4">
-            <button class="btn btn-dark" type="button">Nuova prenotazione</button>
+            <button class="btn btn-dark" type="button" (click)="openCreate()">Nuova prenotazione</button>
             <button class="btn btn-outline-dark" type="button">Importa richieste</button>
           </div>
 
@@ -79,36 +79,185 @@
             </div>
           </div>
 
-          <div class="calendar-grid" [ngClass]="viewMode">
-            <ng-container *ngIf="viewMode !== 'month'">
-              <div class="calendar-row calendar-head">
-                <div class="time-col"></div>
-                <div class="day-col" *ngFor="let day of displayDays">{{ formatDayLabel(day) }}</div>
-              </div>
-
-              <div class="calendar-row" *ngFor="let hour of hours">
-                <div class="time-col">{{ formatHour(hour) }}</div>
-                <div class="slot" *ngFor="let day of displayDays"></div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="viewMode === 'month'">
-              <div class="calendar-row calendar-head month-head">
-                <div class="day-col" *ngFor="let dayName of weekDayNames">{{ dayName }}</div>
-              </div>
-              <div class="month-grid">
-                <div
-                  class="month-cell"
-                  *ngFor="let day of monthGrid"
-                  [class.is-outside]="day.getMonth() !== currentDate.getMonth()"
-                  [class.is-today]="isToday(day)"
-                >
-                  <span class="month-date">{{ day.getDate() }}</span>
+          <ng-container *ngIf="appointments$ | async as appointments">
+            <div class="calendar-grid" [ngClass]="viewMode">
+              <ng-container *ngIf="viewMode !== 'month'">
+                <div class="calendar-row calendar-head">
+                  <div class="time-col"></div>
+                  <div class="day-col" *ngFor="let day of displayDays">{{ formatDayLabel(day) }}</div>
                 </div>
-              </div>
+
+                  <div class="calendar-row" *ngFor="let hour of hours">
+                    <div class="time-col">{{ formatHour(hour) }}</div>
+                    <div class="slot" *ngFor="let day of displayDays" (click)="openCreateFromSlot(day, hour)">
+                      <div
+                        class="appointment-card"
+                        *ngFor="let appointment of getAppointmentsForSlot(appointments, day, hour)"
+                        [ngClass]="appointmentStatusClass(appointment.status)"
+                        (click)="openEdit(appointment); $event.stopPropagation()"
+                      >
+                        <div class="appointment-header">
+                          <span class="appointment-title">{{ appointment.dogName }}</span>
+                          <span class="appointment-time">{{ formatTimeRange(appointment) }}</span>
+                        </div>
+                        <div class="appointment-meta">
+                          <span class="appointment-tag">{{ appointment.serviceType }}</span>
+                          <span class="appointment-owner">{{ appointment.ownerName }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+
+              <ng-container *ngIf="viewMode === 'month'">
+                <div class="calendar-row calendar-head month-head">
+                  <div class="day-col" *ngFor="let dayName of weekDayNames">{{ dayName }}</div>
+                </div>
+                <div class="month-grid">
+                  <div
+                    class="month-cell"
+                    *ngFor="let day of monthGrid"
+                    [class.is-outside]="day.getMonth() !== currentDate.getMonth()"
+                    [class.is-today]="isToday(day)"
+                    (click)="openCreateFromSlot(day, 9)"
+                  >
+                    <span class="month-date">{{ day.getDate() }}</span>
+                    <ng-container *ngIf="getAppointmentsForDay(appointments, day) as dayAppointments">
+                      <div class="month-appointments">
+                        <span
+                          class="month-chip"
+                          *ngFor="let appointment of dayAppointments | slice:0:2"
+                          [ngClass]="appointmentStatusClass(appointment.status)"
+                          (click)="openEdit(appointment); $event.stopPropagation()"
+                        >
+                          {{ appointment.dogName }}
+                        </span>
+                        <span class="month-count" *ngIf="dayAppointments.length > 2">
+                          +{{ dayAppointments.length - 2 }}
+                        </span>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+<div class="modal-panel" *ngIf="isModalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow mb-1">Appuntamento</p>
+          <h2 class="modal-title mb-0">{{ modalMode === 'edit' ? 'Modifica appuntamento' : 'Nuovo appuntamento' }}</h2>
+        </div>
+        <button class="btn-close" type="button" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label">Nome cane</label>
+            <input class="form-control" type="text" [(ngModel)]="draftAppointment.dogName" placeholder="Luna" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Nome proprietario</label>
+            <input class="form-control" type="text" [(ngModel)]="draftAppointment.ownerName" placeholder="Giulia Rossi" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">ID cane</label>
+            <input class="form-control" type="text" [(ngModel)]="draftAppointment.dogId" placeholder="d1b1d3e2..." />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Servizio</label>
+            <select class="form-select" [(ngModel)]="draftAppointment.serviceType">
+              <option value="bath">Bagno</option>
+              <option value="full-groom">Full groom</option>
+              <option value="trim">Rifinitura</option>
+              <option value="nails">Unghie</option>
+              <option value="stripping">Stripping</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Data</label>
+            <input
+              class="form-control"
+              type="date"
+              [(ngModel)]="draftAppointment.date"
+              (ngModelChange)="refreshAssignees($event)"
+            />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Ora inizio</label>
+            <input class="form-control" type="time" [(ngModel)]="draftAppointment.startTime" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Ora fine</label>
+            <input class="form-control" type="time" [(ngModel)]="draftAppointment.endTime" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Stato</label>
+            <select class="form-select" [(ngModel)]="draftAppointment.status">
+              <option value="draft">Bozza</option>
+              <option value="confirmed">Confermato</option>
+              <option value="in-progress">In corso</option>
+              <option value="completed">Completato</option>
+              <option value="cancelled">Cancellato</option>
+              <option value="no-show">No show</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Comportamento</label>
+            <select class="form-select" [(ngModel)]="draftAppointment.behavior">
+              <option value="calmo">Calmo</option>
+              <option value="normale">Normale</option>
+              <option value="ansioso">Ansioso</option>
+              <option value="difficile">Difficile</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Assegnatario</label>
+            <ng-container *ngIf="availableAssignees$ | async as assignees">
+              <select class="form-select" [(ngModel)]="draftAppointment.assigneeId">
+                <option value="">Seleziona</option>
+                <option *ngFor="let assignee of assignees" [value]="assignee.id">
+                  {{ assignee.label }}
+                </option>
+              </select>
+              <p class="small subtle mt-2" *ngIf="assignees.length === 0">
+                Nessun membro disponibile per questa data.
+              </p>
             </ng-container>
           </div>
+          <div class="col-12">
+            <label class="form-label">Note</label>
+            <textarea class="form-control" rows="3" [(ngModel)]="draftAppointment.notes" placeholder="Note operative"></textarea>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="draftAppointment.requiresTwoPeople" id="requiresTwoPeople">
+              <label class="form-check-label" for="requiresTwoPeople">Richiede due persone</label>
+            </div>
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="draftAppointment.muzzleRequired" id="muzzleRequired">
+              <label class="form-check-label" for="muzzleRequired">Museruola richiesta</label>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-dark" type="button" (click)="closeModal()">Annulla</button>
+        <button class="btn btn-outline-danger" type="button" *ngIf="modalMode === 'edit'" (click)="deleteSelectedAppointment()">
+          Elimina
+        </button>
+        <button class="btn btn-dark" type="button" (click)="saveAppointment()">
+          {{ modalMode === 'edit' ? 'Salva modifiche' : 'Crea appuntamento' }}
+        </button>
       </div>
     </div>
   </div>
